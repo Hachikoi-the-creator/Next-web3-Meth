@@ -3,15 +3,14 @@ import { useEffect, useState, useRef } from "react";
 export default function Navbar() {
 
   const [connected, setConnect] = useState(false);
-  const [currAddress, updateAddress] = useState('0x');
-  // const detectChainChange = useRef()
+  const [currAddress, setAddress] = useState('0x');
 
   const getAddress = async () => {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
-    updateAddress(addr);
+    setAddress(addr);
   };
 
   const connectWallet = async () => {
@@ -44,7 +43,7 @@ export default function Navbar() {
       console.log("The account has been changed, do something dev");
       setConnect(false);
 
-      window.location.reload();
+      // window.location.reload();
     });
   });
 
