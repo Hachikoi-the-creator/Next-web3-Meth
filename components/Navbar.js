@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-// import { useMoralis } from "react-moralis";
+import { useMoralis } from "react-moralis";
 
 export default function Navbar() {
-  // const { enableWeb3 } = useMoralis();
+  const { enableWeb3, isWeb3Enabled } = useMoralis();
   const [connected, setConnect] = useState(false);
   const [currAddress, setAddress] = useState("0x");
 
@@ -33,7 +33,7 @@ export default function Navbar() {
         console.log("Getting account in correct chain here");
         getAddress();
       });
-    // enableWeb3();
+    enableWeb3();
     setConnect(true);
   };
 
@@ -44,7 +44,6 @@ export default function Navbar() {
     }
 
     window.ethereum.on("chainChanged", (/*accounts*/) => {
-      // does f5 if the chain changes, I guess
       console.log("The account has been changed, do something dev");
       setConnect(false);
 
@@ -62,6 +61,9 @@ export default function Navbar() {
         </li>
         <li>
           <h2>{connected ? currAddress : "-not connected-"}</h2>
+        </li>
+        <li>
+          <p>{`is web3 enabled?: ${isWeb3Enabled}`}</p>
         </li>
       </ul>
     </>

@@ -1,13 +1,13 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useMoralis, useWeb3Contract } from "react-moralis";
+// import { useMoralis, useWeb3Contract } from "react-moralis";
 import Query from "../components/contractFunctions/query";
 // import { ADDRESS, ABI } from "../utils/contractData";
-// import styles from '../styles/Home.module.css'
+import styles from "../styles/Home.module.scss";
 
 export default function Home() {
-  const { enableWeb3, isWeb3Enabled } = useMoralis();
+  // const { enableWeb3, isWeb3Enabled } = useMoralis();
 
   // const enableWeb3AndRun = () => {
   //   enableWeb3();
@@ -27,11 +27,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
+      <div className={styles.border}>
         <h1>Connect me whit this cool app</h1>
 
-        <p>{`is web3 enabled?: ${isWeb3Enabled}`}</p>
-        <button onClick={enableWeb3}>Enable it</button>
+        {/* <p>{`is web3 enabled?: ${isWeb3Enabled}`}</p>
+        <button id="dirty-fix" onClick={enableWeb3}>
+          Enable it
+        </button> */}
         <Query />
       </div>
     </div>

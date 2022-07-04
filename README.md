@@ -33,4 +33,6 @@ contract Storage {
 }
 ```
 
-## FRONTEND
+## Docs
+- **/components/Navbar**
+Manages all the logic to connect to metamask and force chain change if the user is not the correct one, also enablesWeb3 (moralis)
