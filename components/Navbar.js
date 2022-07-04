@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from "react";
+// import { useMoralis } from "react-moralis";
 
 export default function Navbar() {
-
+  // const { enableWeb3 } = useMoralis();
   const [connected, setConnect] = useState(false);
-  const [currAddress, setAddress] = useState('0x');
+  const [currAddress, setAddress] = useState("0x");
 
   const getAddress = async () => {
     const ethers = require("ethers");
@@ -14,21 +15,25 @@ export default function Navbar() {
   };
 
   const connectWallet = async () => {
-
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId !== '0x5') {
-      console.log('Incorrect network! Switch your metamask network to Goerly, sending request to change');
+    const chainId = await window.ethereum.request({ method: "eth_chainId" });
+    // if (chainId !== '0x5') {
+    if (chainId !== "0x13881") {
+      //mumbai tesnet
+      console.log(
+        "Incorrect network! Switch your metamask network to Goerly, sending request to change"
+      );
       await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0x5" }],
       });
     }
-    await window.ethereum.request({ method: 'eth_requestAccounts' })
+    await window.ethereum
+      .request({ method: "eth_requestAccounts" })
       .then(() => {
         console.log("Getting account in correct chain here");
         getAddress();
       });
-
+    // enableWeb3();
     setConnect(true);
   };
 
@@ -38,7 +43,7 @@ export default function Navbar() {
       getAddress();
     }
 
-    window.ethereum.on('chainChanged', (/*accounts*/) => {
+    window.ethereum.on("chainChanged", (/*accounts*/) => {
       // does f5 if the chain changes, I guess
       console.log("The account has been changed, do something dev");
       setConnect(false);
@@ -47,13 +52,18 @@ export default function Navbar() {
     });
   });
 
-
-  return <>
-    <h1>Connect me whit the amazing metavereade</h1>
-    <button onClick={connectWallet}>
-      {connected ? "Connected" : "Connect Wallet"}
-    </button>
-    <h2>{connected ? currAddress : "-not connected-"}</h2>
-  </>;
+  return (
+    <>
+      <ul>
+        <li>
+          <button onClick={connectWallet}>
+            {connected ? "Connected" : "Connect Wallet"}
+          </button>
+        </li>
+        <li>
+          <h2>{connected ? currAddress : "-not connected-"}</h2>
+        </li>
+      </ul>
+    </>
+  );
 }
-

@@ -1,11 +1,14 @@
-import '../styles/globals.css';
+import "../styles/globals.scss";
 import Layout from "../components/Layout";
+import { MoralisProvider } from "react-moralis";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <MoralisProvider initializeOnMount={false}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </MoralisProvider>
   );
 }
 

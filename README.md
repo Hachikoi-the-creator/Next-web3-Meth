@@ -9,6 +9,28 @@
 - make a contract that only recieves erc20 from (0xED5464bd5c477b7F71739Ce1d741b43E932b97b0) & eth [method src](https://stackoverflow.com/questions/65846335/how-to-send-erc20-token-to-smart-contract-balance)
 - 
 
+## default contract
+- (mumbai) - 0xAcb69A95a280276795F2191A469da2881b70813d
 
+```c#
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
+
+contract Storage {
+    uint public theNum;
+
+    constructor (uint _defaultNum) {
+        theNum = _defaultNum;
+    }
+
+    function changeNum(uint _newNum) public {
+        theNum = _newNum;
+    }
+
+    function queryNum() public view returns (uint) {
+        return theNum;
+    }
+}
+```
 
 ## FRONTEND
